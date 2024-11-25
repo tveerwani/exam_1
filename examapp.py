@@ -27,7 +27,9 @@ if st.checkbox("Show raw data"):
 st.header("2. Correlation Heatmap")
 if st.checkbox("Show correlation heatmap"):
     st.subheader("Correlation between numerical features")
-    corr_matrix = df.corr()
+    # Select only numeric columns
+    numeric_df = df.select_dtypes(include=["number"])
+    corr_matrix = numeric_df.corr()
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm", ax=ax)
     st.pyplot(fig)
